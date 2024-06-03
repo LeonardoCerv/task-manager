@@ -7,20 +7,20 @@ private:
     int hora;
 
 public:
-    Recordatorio(): fecha({}), hora(12) {};
+    Recordatorio(): fecha(), hora(12) {};
     Recordatorio(vector<int> fecha): fecha(fecha), hora(12){};
-    
+    Recordatorio(vector<int> fecha, int hora): fecha(fecha), hora(hora){};
 
     // Getters and setters for the attributes
     vector<int> get_fecha() {
-    return fecha;
+        return fecha;
     }
 
     int get_hora() {
     return hora;
    }
 
-    void setDate(vector<int> fecha) {
+    void setFecha(vector<int> fecha) {
         this->fecha = fecha;
     }
 
