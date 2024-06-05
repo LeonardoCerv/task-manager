@@ -29,6 +29,8 @@ public:
 
     void eliminarTarea(int index);
 
+    void menuTareas();
+
     // Listas methods
     void mostrarListas();
 
@@ -38,6 +40,9 @@ public:
 
     void agregarTareaLista(int indexLista, int indexTarea);
 
+    void mostrarTareasLista(Lista lista);
+
+    void menuListas();
 };
 
 // Listas methods
@@ -141,7 +146,6 @@ void Usuario::crearTarea() {
     }
 }
 
-
 void Usuario::eliminarTarea(int index) {
     if (index >= tareas.size()) {
         cout<<"No existe una tarea en el index "<<index<<endl;
@@ -149,6 +153,35 @@ void Usuario::eliminarTarea(int index) {
     }
     tareas.erase(tareas.begin() + index);
     cout<<"La Tarea en el index "<<index<<" se ha eliminado"<<endl;
+}
+
+void Usuario::menuTareas() {
+    string seleccion;
+    cout<<"Bienvenido a tu menu de tareas"<<endl;
+    cout<<"1. Crear tarea"<<endl;
+    cout<<"2. Eliminar tarea"<<endl;
+    cout<<"3. Mostrar tareas"<<endl;
+    cout<<"4. Salir"<<endl;
+    cout<<"Ingrese el numero de la opcion que desea realizar: ";
+    cin>>seleccion;
+    if (seleccion == "1") {
+        crearTarea();
+    }
+    else if (seleccion == "2") {
+        int index;
+        cout<<"Ingrese el index de la tarea que desea eliminar: ";
+        cin>>index;
+        eliminarTarea(index);
+    }
+    else if (seleccion == "3") {
+        mostrarTareas();
+    }
+    else if (seleccion == "4") {
+        return;
+    }
+    else {
+        cout<<"Opcion invalida"<<endl;
+    }
 }
 
 void Usuario::agregarTareaLista(int indexLista, int indexTarea) {
@@ -161,4 +194,58 @@ void Usuario::agregarTareaLista(int indexLista, int indexTarea) {
         return;
     }
     listas[indexLista].agregarTarea(tareas[indexTarea]);
+}
+
+void Usuario::mostrarTareasLista(Lista lista) {
+    cout<<"Estas son las tareas de la lista: "<<lista.getNombre()<<endl;
+    for (Tarea * i: lista.getTareas()) {
+        cout<<"Nombre: "<<i->get_nombre()<<endl;
+        cout<<"Descripcion: "<<i->get_descripcion()<<endl;
+    }
+}
+
+void Usuario::menuListas(){
+    string seleccion;
+    cout<<"Bienvenido a tu menu de listas"<<endl;
+    cout<<"1. Crear lista"<<endl;
+    cout<<"2. Eliminar lista"<<endl;
+    cout<<"3. Mostrar listas"<<endl;
+    cout<<"4. Agregar tarea a lista"<<endl;
+    cout<<"5. Mostrar tareas de la lista"<<endl;
+    cout<<"6. Salir"<<endl;
+    cout<<"Ingrese el numero de la opcion que desea realizar: ";
+    cin>>seleccion;
+    if (seleccion == "1") {
+        crearLista();
+    }
+    else if (seleccion == "2") {
+        int index;
+        cout<<"Ingrese el index de la lista que desea eliminar: ";
+        cin>>index;
+        eliminarLista(index);
+    }
+    else if (seleccion == "3") {
+        mostrarListas();
+    }
+    else if (seleccion == "4") {
+        int indexLista;
+        int indexTarea;
+        cout<<"Ingrese el index de la lista a la que desea agregar la tarea: ";
+        cin>>indexLista;
+        cout<<"Ingrese el index de la tarea que desea agregar: ";
+        cin>>indexTarea;
+        agregarTareaLista(indexLista, indexTarea);
+    }
+    else if (seleccion == "5") {
+        int index;
+        cout<<"Ingrese el index de la lista que desea ver: ";
+        cin>>index;
+        mostrarTareasLista(listas[index]);
+    }
+    else if (seleccion == "6") {
+        return;
+    }
+    else {
+        cout<<"Opcion invalida"<<endl;
+    }
 }
