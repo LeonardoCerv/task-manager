@@ -24,70 +24,44 @@ class Tarea {
   //Declaro los métodos que va a tener el objeto
   public:
     Tarea(): nombre(""), prioridad(0), descripcion(""), status(false),recordatorios() {}; //constructor por omision
-    Tarea(string nom, int pri,  string des): nombre(nom), prioridad(pri), descripcion(des), status(false),recordatorios() {};
+    Tarea(string nom, int pri): nombre(nom), prioridad(pri), descripcion(""), status(false),recordatorios() {};
 
-    string get_nombre() {
-      return nombre;
-    }
-
-    int get_prioridad() {
-      return prioridad;
-    }
-
-    string get_descripcion() {
-      return descripcion;
-    }
-
-    bool get_status() {
-      return status;
-    }
-
-    vector<Recordatorio> get_recordatorios() {
-      return recordatorios;
-    }
+    string get_nombre() {return nombre;}
+    int get_prioridad() {return prioridad;}
+    string get_descripcion() {return descripcion;}
+    bool get_status() {return status;}
+    vector<Recordatorio> get_recordatorios() {return recordatorios;}
 
     //setters
-    void set_nombre(string nombre) {
-      this->nombre = nombre;
-    }
+    void set_nombre(string nombre) {this->nombre = nombre;}
+    void set_prioridad(int prioridad) {this->prioridad = prioridad;}
+    void set_descripcion(string descripcion) {this->descripcion = descripcion;}
+    void set_status(bool status) {this->status = status;}
+    void set_recordatorios(vector<Recordatorio> recordatorios) {this->recordatorios = recordatorios;}
 
-    void set_prioridad(int prioridad) {
-      this->prioridad = prioridad;
-    }
+    void eliminarRecordatorio(int index);
+    void mostrarRecordatorios();
+    virtual void crearRecordatorio() = 0;
+};
 
-    void set_descripcion(string descripcion) {
-      this->descripcion = descripcion;
-    }
-
-    void set_status(bool status) {
-      this->status = status;
-    }
-
-    void set_recordatorios(vector<Recordatorio> recordatorios) {
-      this->recordatorios = recordatorios;
-    }
-
-    void eliminarRecordatorio(){
-      int index;
-      cout << "Ingrese el numero del recordatorio que desea eliminar: ";
-      cin >> index;
+void Tarea::eliminarRecordatorio(int index){
+      if (index >= recordatorios.size()){
+        cout<<"No existe un recordatorio en el index "<<index<<endl;
+        return;
+      }
       recordatorios.erase(recordatorios.begin() + index);
     }
     
-
-  void mostrarRecordatorios(){
+  void Tarea::mostrarRecordatorios(){
     cout<<"Estos son tus recordatorios: "<<endl;
     int counter = 1;
       for (Recordatorio i: recordatorios){
       vector<int>fecha = i.get_fecha();
       cout<<"Recordatorio "<<counter<<": ";
-      cout<<"fecha: "<< fecha[0] << "/"<< fecha[1] << "/" << fecha[2] <<endl; 
-      cout<<"hora: "<< i.get_hora()<<endl;
+      cout<<"fecha: "<< fecha[0] << "/"<< fecha[1] << "/" << fecha[2]; 
+      cout<<"   hora: "<< i.get_hora()<<endl;
       }
     }
-    
-  virtual void crearRecordatorio() = 0;
-};
 
 //Declaro objeto asalariado que hereda de Empleado
 class TareaTrabajo: public Tarea {
@@ -98,16 +72,16 @@ class TareaTrabajo: public Tarea {
   //Metodos del objeto
   public:
 
-  TareaTrabajo(): Tarea("", 0, "") {};
-  TareaTrabajo(string nom, int pri, vector<int> fechaEntrega): Tarea(nom, pri, "Esta es una Tarea de Trabajo"),fechaEntrega(fechaEntrega){};
+  TareaTrabajo(): Tarea("", 0) {};
 
-  vector<int> get_fechaEntrega() {
-    return fechaEntrega;
-  }
+  TareaTrabajo(string nom, int pri, vector<int> fech): Tarea(nom, pri), fechaEntrega(fech){
+    string des =  "Esta es una Tarea de Trabajo prevista para el dia "+to_string(fech[0])+" del mes "+to_string(fech[1])+" del año "+to_string(fech[2]);
+    set_descripcion(des);
+  };
+
+  vector<int> get_fechaEntrega() {return fechaEntrega;}
   
-  void set_fechaEntrega(vector<int> fechaEntrega) {
-    this->fechaEntrega = fechaEntrega;
-  }
+  void set_fechaEntrega(vector<int> fechaEntrega) {this->fechaEntrega = fechaEntrega;}
 
   void crearRecordatorio();
 };
@@ -120,6 +94,12 @@ void TareaTrabajo::crearRecordatorio() {
     int hora;
     cout << "Ingrese la hora del recordatorio: ";
     cin >> hora;
+    for (Recordatorio i: recordatorios){
+      if (i.get_fecha() == fechaEntrega && i.get_hora() == hora){
+        cout<<"Ya existe un recordatorio con esa fecha y hora"<<endl;
+        return;
+      }
+    }
     recordatorios.push_back(Recordatorio(fechaEntrega, hora));
   }
   else{
@@ -129,6 +109,12 @@ void TareaTrabajo::crearRecordatorio() {
     cin >> fecha[0] >> fecha[1] >> fecha[2];
     cout << "Ingrese la hora del recordatorio: ";
     cin >> hora;
+    for (Recordatorio i: recordatorios){
+      if (i.get_fecha() == fecha && i.get_hora() == hora){
+        cout<<"Ya existe un recordatorio con esa fecha y hora"<<endl;
+        return;
+      }
+    }
     recordatorios.push_back(Recordatorio(fecha, hora));
   }
 };
@@ -140,21 +126,19 @@ class TareaPersonal: public Tarea {
   //Variables de instancia privadas del objeto
   private:
   string categoria;
-
    //Metodos del objeto
   public:
 
-  TareaPersonal(): Tarea("", 0, "") {};
-  TareaPersonal(string nom, int pri, string categoria): Tarea(nom, pri, "Esta es una Tarea de Trabajo")
-  , categoria(categoria) {};
+  TareaPersonal(): Tarea("", 0) {};
+  TareaPersonal(string nom, int pri, string categoria): Tarea(nom, pri), categoria(categoria) {
+     string des = "Esta es una Tarea Personal perteneciente a la categoria ";
+    des = des+categoria;
+    set_descripcion(des);
+  };
 
-  string get_categoria() {
-    return categoria;
-  }
+  string get_categoria() {return categoria;}
 
-  void set_categoria(string categoria) {
-    this->categoria = categoria;
-  }
+  void set_categoria(string categoria) {this->categoria = categoria;}
 
   void crearRecordatorio();
 };
@@ -163,7 +147,9 @@ void TareaPersonal::crearRecordatorio() {
   vector<int> fecha;
   int hora;
   cout << "Ingrese la fecha del recordatorio (dd/mm/aaaa): ";
-  cin >> fecha[0] >> fecha[1] >> fecha[2];
+  cin >> fecha[0];
+  cin >> fecha[1];
+  cin >> fecha[2];
   cout << "Ingrese la hora del recordatorio: ";
   cin >> hora;
   recordatorios.push_back(Recordatorio(fecha, hora));
