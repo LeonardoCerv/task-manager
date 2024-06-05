@@ -43,6 +43,12 @@ public:
     void mostrarTareasLista(Lista lista);
 
     void menuListas();
+
+    // Otros metodos
+
+    void menu();
+
+    void cambiarNombre();
 };
 
 // Listas methods
@@ -69,6 +75,7 @@ void Usuario::crearLista() {
         }
     }
     listas.push_back(l);
+    cout<<"Se ha creado la lista "<<listas.back().getNombre()<<endl;
 }
 
 void Usuario::eliminarLista(int index) {
@@ -142,7 +149,7 @@ void Usuario::crearTarea() {
     }
     else{
         cout<<"Tipo de tarea invalido"<<endl;
-        return;
+        crearTarea();
     }
 }
 
@@ -152,6 +159,8 @@ void Usuario::eliminarTarea(int index) {
         return;
     }
     tareas.erase(tareas.begin() + index);
+    //delete tareas[index];
+    //tareas[index]->~Tarea();
     cout<<"La Tarea en el index "<<index<<" se ha eliminado"<<endl;
 }
 
@@ -169,9 +178,9 @@ void Usuario::menuTareas() {
     }
     else if (seleccion == "2") {
         int index;
-        cout<<"Ingrese el index de la tarea que desea eliminar: ";
+        cout<<"Ingrese el numero de la tarea que desea eliminar: ";
         cin>>index;
-        eliminarTarea(index);
+        eliminarTarea(index-1);
     }
     else if (seleccion == "3") {
         mostrarTareas();
@@ -182,6 +191,7 @@ void Usuario::menuTareas() {
     else {
         cout<<"Opcion invalida"<<endl;
     }
+    menuTareas();
 }
 
 void Usuario::agregarTareaLista(int indexLista, int indexTarea) {
@@ -197,6 +207,23 @@ void Usuario::agregarTareaLista(int indexLista, int indexTarea) {
 }
 
 void Usuario::mostrarTareasLista(Lista lista) {
+    int counter = 0;
+    bool valid = false;
+    for (Tarea * j: lista.getTareas()){
+        for (int i = 0; i < tareas.size(); i++){
+            if (tareas[i]->get_nombre() == j->get_nombre() && tareas[i]->get_descripcion() == j->get_descripcion()){
+                valid = true;
+            }
+        }
+        if (!valid){
+            cout<<"La tarea "<<j->get_nombre()<<" no existe en la lista de tareas"<<endl;
+            lista.eliminarTarea(counter);
+            continue;
+        }
+        counter++;
+    }
+
+
     cout<<"Estas son las tareas de la lista: "<<lista.getNombre()<<endl;
     for (Tarea * i: lista.getTareas()) {
         cout<<"Nombre: "<<i->get_nombre()<<endl;
@@ -220,9 +247,9 @@ void Usuario::menuListas(){
     }
     else if (seleccion == "2") {
         int index;
-        cout<<"Ingrese el index de la lista que desea eliminar: ";
+        cout<<"Ingrese el numero de la lista que desea eliminar: ";
         cin>>index;
-        eliminarLista(index);
+        eliminarLista(index-1);
     }
     else if (seleccion == "3") {
         mostrarListas();
@@ -230,17 +257,17 @@ void Usuario::menuListas(){
     else if (seleccion == "4") {
         int indexLista;
         int indexTarea;
-        cout<<"Ingrese el index de la lista a la que desea agregar la tarea: ";
+        cout<<"Ingrese el numero de la lista a la que desea agregar la tarea: ";
         cin>>indexLista;
-        cout<<"Ingrese el index de la tarea que desea agregar: ";
+        cout<<"Ingrese el numero de la tarea que desea agregar: ";
         cin>>indexTarea;
-        agregarTareaLista(indexLista, indexTarea);
+        agregarTareaLista(indexLista-1, indexTarea-1);
     }
     else if (seleccion == "5") {
         int index;
-        cout<<"Ingrese el index de la lista que desea ver: ";
+        cout<<"Ingrese el numero de la lista que desea ver: ";
         cin>>index;
-        mostrarTareasLista(listas[index]);
+        mostrarTareasLista(listas[index-1]);
     }
     else if (seleccion == "6") {
         return;
@@ -248,4 +275,40 @@ void Usuario::menuListas(){
     else {
         cout<<"Opcion invalida"<<endl;
     }
+    menuListas();
+}
+
+void Usuario::menu(){
+    string seleccion;
+    cout<<"Bienvenido "<<nombreUsuario<<endl;
+    cout<<"1. Menu de tareas"<<endl;
+    cout<<"2. Menu de listas"<<endl;
+    cout<<"3. Cambiar nombre de usuario"<<endl;
+    cout<<"5. Salir"<<endl;
+    cout<<"Ingrese el numero de la opcion que desea realizar: ";
+    cin>>seleccion;
+    if (seleccion == "1") {
+        menuTareas();
+    }
+    else if (seleccion == "2") {
+        menuListas();
+    }
+    else if (seleccion == "3") {
+        cambiarNombre();
+    }
+    else if (seleccion == "4") {
+        return;
+    }
+    else {
+        cout<<"Opcion invalida"<<endl;
+    }
+    menu();
+}
+
+void Usuario::cambiarNombre() {
+    string nuevoNombre;
+    cout<<"Ingrese su nuevo nombre de usuario: ";
+    cin>>nuevoNombre;
+    nombreUsuario = nuevoNombre;
+    cout<<"Se nombre de usuario es "<<nombreUsuario<<endl;
 }

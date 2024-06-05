@@ -33,6 +33,7 @@ public:
     void mostrarTareas();
     void agregarTarea(Tarea* tarea);
     void eliminarTarea(int index);
+
 };
 
 // Definition of moved methods
@@ -52,7 +53,7 @@ void Lista::agregarTarea(Tarea* tarea){
         }
     }
     this->tareas.push_back(tarea);
-    cout<<"Se ha agregado la tarea "<<tarea->get_nombre()<<" a la lista"<<nombre<<endl;
+    cout<<"Se ha agregado la tarea "<<tareas.back()->get_nombre()<<" a la lista "<<nombre<<endl;
 }
 
 void Lista::eliminarTarea(int index){

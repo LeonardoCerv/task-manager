@@ -84,6 +84,12 @@ class TareaTrabajo: public Tarea {
   void set_fechaEntrega(vector<int> fechaEntrega) {this->fechaEntrega = fechaEntrega;}
 
   void crearRecordatorio();
+  
+  //destructores
+  ~TareaTrabajo() {
+    cout << "Tarea de trabajo destruida" << endl;
+  }
+
 };
 
 void TareaTrabajo::crearRecordatorio() {
@@ -141,6 +147,11 @@ class TareaPersonal: public Tarea {
   void set_categoria(string categoria) {this->categoria = categoria;}
 
   void crearRecordatorio();
+
+  //destructores
+  ~TareaPersonal() {
+    cout << "Tarea personal destruida" << endl;
+  }
 };
 
 void TareaPersonal::crearRecordatorio() {

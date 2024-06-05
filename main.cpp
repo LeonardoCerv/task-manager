@@ -5,16 +5,18 @@
 
 int main() {
 Usuario myU;
+myU.cambiarNombre();
+myU.menu();
 
-myU.crearTarea();
-myU.crearLista();
+//myU.crearTarea();
+//myU.crearLista();
 
-myU.mostrarTareas();
-myU.mostrarListas();
-myU.agregarTareaLista(0, 0);
+//myU.mostrarTareas();
+//myU.mostrarListas();
+//myU.agregarTareaLista(0, 0);
 
-vector<Lista> myL = myU.getListas();
-myL[0].mostrarTareas();
+//vector<Lista> myL = myU.getListas();
+//myL[0].mostrarTareas();
 
 
     /*
