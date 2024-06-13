@@ -179,11 +179,14 @@ void Usuario::crearTarea() {
     cin>>nom;
     cout<<"Ingrese la prioridad de la tarea: ";
     cin>>pri;
-    cout << "Ingrese la fecha de entrega (dd/mm/aaaa): ";
+    cout << "Ingrese la fecha de entrega: ";
+    cout << "Dia: ";
     cin>>aux;
     fecha.push_back(aux);
+    cout << "Mes: ";
     cin>>aux;
     fecha.push_back(aux);
+    cout << "Año: ";
     cin>>aux;
     fecha.push_back(aux);
     for (Tarea * i: tareas){

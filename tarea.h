@@ -128,7 +128,7 @@ class TareaTrabajo: public Tarea {
     //constructores
     TareaTrabajo(): Tarea("", 0) {}; //constructor por default
     TareaTrabajo(string nom, int pri, vector<int> fech): Tarea(nom, pri), 
-      fechaEntrega(fech){
+        fechaEntrega(fech){
       string des =  "Esta es una Tarea de Trabajo prevista para el dia "+
         to_string(fech[0])+" del mes "+to_string(fech[1])+" del año "+
         to_string(fech[2]);
