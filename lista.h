@@ -1,7 +1,17 @@
+/*
+ *
+ * Proyecto TC1030 clase Tarea
+ * Leonardo Cervantes Perez
+ * A07184003
+ * 12/06/2024
+ * Esta clase define objeto de tipo Lista que contiene objetos de clase Tarea.
+ */
+
 #ifndef LISTA_H_
 #define LISTA_H_
 #include <string>
-#include "tarea.h"
+
+#include "tarea.h" // bibliotecas con mi objeto a usar.
 
 using namespace std;
 
@@ -65,4 +75,4 @@ void Lista::eliminarTarea(int index){
     cout<<"la tarea en el index "<<index<<" se ha eliminado"<<endl;
 }
 
-#endif
+#endif // LISTA_H_

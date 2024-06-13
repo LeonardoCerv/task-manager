@@ -1,3 +1,13 @@
+/*
+ *
+ * Proyecto TC1030 clase Tarea
+ * Leonardo Cervantes Perez
+ * A07184003
+ * 12/06/2024
+ * Esta clase define objeto de tipo Tarea que contiene las clases heredadas
+ * TareaTrabajo y TareaPersonal.
+ */
+
 #ifndef TAREA_H_
 #define TAREA_H_
 
@@ -10,7 +20,7 @@
 
 using namespace std;
 
-//Declaracion de clase empleado que es abstracta
+//Declaracion de clase Tarea que es abstracta
 class Tarea {
 
   //Declaro variables de instancia

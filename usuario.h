@@ -1,5 +1,18 @@
+/*
+ *
+ * Proyecto TC1030 clase Tarea
+ * Leonardo Cervantes Perez
+ * A07184003
+ * 12/06/2024
+ * Esta clase define objeto de tipo Usuario que contiene objetos de clase Lista y Tarea.
+ * permite al usuario interactuar con sus tareas y listas.
+ */
+
+#ifndef USUARIO_H_
+#define USUARIO_H_
 #include <string>
-#include "tarea.h"
+
+#include "tarea.h" // bibliotecas con mis objetos a usar.
 #include "lista.h"
 
 class Usuario {
@@ -312,3 +325,5 @@ void Usuario::cambiarNombre() {
     nombreUsuario = nuevoNombre;
     cout<<"Se nombre de usuario es "<<nombreUsuario<<endl;
 }
+
+#endif // USUARIO_H_
