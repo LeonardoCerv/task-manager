@@ -4,8 +4,9 @@
  * Leonardo Cervantes Perez
  * A07184003
  * 12/06/2024
- * Esta clase define objeto de tipo Usuario que contiene objetos de clase Lista y Tarea.
- * permite al usuario interactuar con sus tareas y listas.
+ * Esta clase define objeto de tipo Usuario que contiene objetos de la 
+ * clase Lista y Tarea ademas permite al usuario interactuar con sus 
+ * tareas y listas.
  */
 
 #ifndef USUARIO_H_
@@ -27,7 +28,8 @@ private:
 public:
     // Constructores
     Usuario() : nombreUsuario(""), listas(), tareas() {} // Constructor por default
-    Usuario(string nombreUsuario): nombreUsuario(nombreUsuario), listas(), tareas() {}
+    Usuario(string nombreUsuario): nombreUsuario(nombreUsuario), 
+    listas(), tareas() {}
 
     // Getters
     string getNombreUsuario() {
@@ -88,6 +90,15 @@ void Usuario::mostrarListas() {
     }
 }
 
+/**
+ * crearListas crea una lista nueva para el usuario
+ *
+ * utiliza valores que ingresa el usuario y el arreglo listas[]
+ * para almacenar el nuevo objeto de la clase Lista.
+ *
+ * @param
+ * @return
+ */
 void Usuario::crearLista() {
     string nom;
     string des;
@@ -106,6 +117,15 @@ void Usuario::crearLista() {
     cout<<"Se ha creado la lista "<<listas.back().getNombre()<<endl;
 }
 
+/**
+ * eliminarListas elimina la lista en el index del arreglo listas[]
+ *
+ * utiliza el index y el arreglo listas[] para eliminar el objeto de 
+ * el arreglo.
+ *
+ * @param int index
+ * @return
+ */
 void Usuario::eliminarLista(int index) {
     if (index >= listas.size()) {
         cout<<"No existe una lista en el index "<<index<<endl;
@@ -115,7 +135,15 @@ void Usuario::eliminarLista(int index) {
     cout<<"La lista en el index "<<index<<" se ha eliminado"<<endl;
 }
 
-// Tareas methods
+/**
+ * mostrarTareas muestra todas las tareas del usuario
+ *
+ * recorre el arreglo tareas[] y muestra el nombre y la descripción 
+ * de cada tarea en la consola.
+ *
+ * @param
+ * @return
+ */
 void Usuario::mostrarTareas() {
     cout<<"Estas son tus tareas: "<<endl;
     for (int i=0; i < tareas.size(); i++){
@@ -125,6 +153,19 @@ void Usuario::mostrarTareas() {
     }
 }
 
+/**
+ * crearTarea crea una nueva tarea de tipo Trabajo o Personal
+ *
+ * solicita al usuario el tipo de tarea (Trabajo o Personal), y luego
+ * recibe los valores necesarios para crear la tarea específica.
+ * Verifica si ya existe una tarea con el mismo nombre antes de 
+ * agregar la nueva tarea al arreglo de tareas.
+ * Si el tipo de tarea ingresado no es válido, muestra un mensaje de
+ * error y vuelve a solicitar el tipo de tarea.
+ *
+ * @param
+ * @return
+ */
 void Usuario::crearTarea() {
     string tipo;
     cout<<"Ingrese el tipo de tarea (Trabajo o Personal): ";
@@ -180,6 +221,15 @@ void Usuario::crearTarea() {
     }
 }
 
+/**
+ * eliminarTarea elimina la tarea en el index del arreglo tareas[]
+ *
+ * utiliza el index y el arreglo tareas[] para eliminar el objeto de 
+ * el arreglo.
+ *
+ * @param int index
+ * @return
+ */
 void Usuario::eliminarTarea(int index) {
     if (index >= tareas.size()) {
         cout<<"No existe una tarea en el index "<<index<<endl;
@@ -191,6 +241,19 @@ void Usuario::eliminarTarea(int index) {
     cout<<"La Tarea en el index "<<index<<" se ha eliminado"<<endl;
 }
 
+/**
+ * menuTareas es el menu de tareas del usuario
+ *
+ * muestra las opciones de tareas (crear, eliminar, mostrar) y 
+ * solicita al usuario que ingrese el número de la opción deseada.
+ * Llama a los métodos correspondientes según la opción ingresada.
+ * Si la opción ingresada no es válida, muestra un mensaje de error.
+ * Llama a sí mismo al final para que el usuario pueda seguir
+ * interactuando con el programa.
+ *
+ * @param
+ * @return
+ */
 void Usuario::menuTareas() {
     string seleccion;
     cout<<"Bienvenido a tu menu de tareas"<<endl;
@@ -221,6 +284,19 @@ void Usuario::menuTareas() {
     menuTareas();
 }
 
+
+/**
+ * agregarTareaLista agrega una tarea existente a una lista específica
+ *
+ * utiliza los índices proporcionados para agregar una tarea del 
+ * arreglo tareas[] a una lista del arreglo listas[]. Verifica si 
+ * los índices proporcionados son válidos antes de realizar la 
+ * operación.
+ *
+ * @param int indexLista
+ * @param int indexTarea
+ * @return
+ */
 void Usuario::agregarTareaLista(int indexLista, int indexTarea) {
     if (indexLista >= listas.size()) {
         cout<<"No existe una lista en el index "<<indexLista<<endl;
@@ -233,6 +309,17 @@ void Usuario::agregarTareaLista(int indexLista, int indexTarea) {
     listas[indexLista].agregarTarea(tareas[indexTarea]);
 }
 
+/**
+ * mostrarTareasLista muestra las tareas de una lista específica
+ *
+ * recorre el arreglo de tareas de la lista y muestra el nombre y 
+ * la descripción de cada tarea en la consola.
+ * Verifica si las tareas de la lista existen en el arreglo tareas[]
+ * antes de mostrarlas.
+ *
+ * @param Lista lista
+ * @return
+ */
 void Usuario::mostrarTareasLista(Lista lista) {
     int counter = 0;
     bool valid = false;
@@ -249,8 +336,6 @@ void Usuario::mostrarTareasLista(Lista lista) {
         }
         counter++;
     }
-
-
     cout<<"Estas son las tareas de la lista: "<<lista.getNombre()<<endl;
     for (Tarea * i: lista.getTareas()) {
         cout<<"Nombre: "<<i->get_nombre()<<endl;
@@ -258,6 +343,19 @@ void Usuario::mostrarTareasLista(Lista lista) {
     }
 }
 
+/**
+ * menuListas es el menu de listas del usuario
+ *
+ * muestra las opciones de listas (crear, eliminar, mostrar, agregar 
+ * tarea, mostrar tareas) y solicita al usuario que ingrese el número 
+ * de la opción deseada. Llama a los métodos correspondientes según 
+ * la opción ingresada. Si la opción ingresada no es válida, muestra
+ * un mensaje de error. Llama a sí mismo al final para que el usuario
+ * pueda seguir interactuando con el programa.
+ *
+ * @param
+ * @return
+ */
 void Usuario::menuListas(){
     string seleccion;
     cout<<"Bienvenido a tu menu de listas"<<endl;
@@ -305,6 +403,20 @@ void Usuario::menuListas(){
     menuListas();
 }
 
+/**
+ * menu es el menu principal del usuario
+ *
+ * muestra las opciones de menú (tareas, listas, cambiar nombre, salir)
+ * y solicita al usuario que ingrese el número de la opción deseada.
+ * Llama a los métodos correspondientes según la opción ingresada.
+ * Si la opción ingresada no es válida, muestra un mensaje de error.
+ * Llama a sí mismo al final para que el usuario pueda seguir
+ * interactuando con el programa.
+ * 
+ * @param
+ * @return
+ */
+
 void Usuario::menu(){
     string seleccion;
     cout<<"Bienvenido "<<nombreUsuario<<endl;
@@ -332,6 +444,15 @@ void Usuario::menu(){
     menu();
 }
 
+/**
+ * cambiarNombre cambia el nombre de usuario
+ *
+ * solicita al usuario que ingrese un nuevo nombre de usuario y 
+ * actualiza el valor de la variable nombreUsuario.
+ *
+ * @param
+ * @return
+ */
 void Usuario::cambiarNombre() {
     string nuevoNombre;
     cout<<"Ingrese su nuevo nombre de usuario: ";
