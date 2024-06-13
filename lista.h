@@ -19,13 +19,13 @@ using namespace std;
 class Lista {
 
 // Variables de instancia
-private:
+  private:
     string nombre;
     string descripcion;
     bool status;
     vector<Tarea*> tareas;
 
-public:
+  public:
     // Constructores
     Lista() : nombre(""), descripcion(""), status(false), tareas() {}; // Constructor por default
     Lista(string nombre): nombre(nombre), descripcion(""), status(false), tareas() {};
@@ -33,16 +33,32 @@ public:
     status(false), tareas() {};
 
     // Getters
-    string getNombre() { return nombre; }
-    string getDescripcion()  { return descripcion; }
-    bool getStatus() { return status; }
-    vector<Tarea*> getTareas() {return tareas;}
+    string getNombre() {
+        return nombre; 
+    }
+    string getDescripcion()  { 
+        return descripcion; 
+    }
+    bool getStatus() { 
+        return status; 
+    }
+    vector<Tarea*> getTareas() {
+        return tareas;
+    }
 
     // Setters
-    void setNombre(const std::string& nombre) { this->nombre = nombre; }
-    void setDescripcion(const std::string& descripcion) { this->descripcion = descripcion; }
-    void setStatus(bool status) { this->status = status; }
-    void setTareas(vector<Tarea*> tareas) {this->tareas = tareas;}
+    void setNombre(const std::string& nombre) { 
+        this->nombre = nombre; 
+    }
+    void setDescripcion(const std::string& descripcion) { 
+        this->descripcion = descripcion; 
+    }
+    void setStatus(bool status) { 
+        this->status = status; 
+    }
+    void setTareas(vector<Tarea*> tareas) {
+        this->tareas = tareas;
+    }
 
     // Metodos
     void mostrarTareas();
@@ -63,8 +79,8 @@ public:
 void Lista::mostrarTareas(){
     cout<<"Estas son las tareas en la lista "<<nombre<<": "<<endl;
     for (int i=0; i < tareas.size(); i++){
-        cout<<"Nombre: "<<tareas[i]->get_nombre()<<endl;
-        cout<<"Descripcion: "<<tareas[i]->get_descripcion()<<endl;
+        cout<<"Nombre: "<<tareas[i]->getNombre()<<endl;
+        cout<<"Descripcion: "<<tareas[i]->getDescripcion()<<endl;
     }
 }
 
@@ -79,13 +95,13 @@ void Lista::mostrarTareas(){
  */
 void Lista::agregarTarea(Tarea* tarea){
     for (Tarea * i: tareas){
-        if (i->get_nombre() == tarea->get_nombre() && i->get_descripcion() == tarea->get_descripcion()){
+        if (i->getNombre() == tarea->getNombre() && i->getDescripcion() == tarea->getDescripcion()){
             cout<<"Esa tarea ya fue agregada a la lista"<<endl;
             return;
         }
     }
     this->tareas.push_back(tarea);
-    cout<<"Se ha agregado la tarea "<<tareas.back()->get_nombre()<<" a la lista "<<nombre<<endl;
+    cout<<"Se ha agregado la tarea "<<tareas.back()->getNombre()<<" a la lista "<<nombre<<endl;
 }
 
 /**
