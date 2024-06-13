@@ -15,56 +15,71 @@
 #include "tarea.h" // bibliotecas con mis objetos a usar.
 #include "lista.h"
 
+// Declaro la clase Usuario
 class Usuario {
+
+// Variables de instancia
 private:
     string nombreUsuario;
     vector <Lista> listas;
     vector <Tarea*> tareas;
 
 public:
-    // Constructor
-    Usuario() : nombreUsuario(""), listas(), tareas() {}
+    // Constructores
+    Usuario() : nombreUsuario(""), listas(), tareas() {} // Constructor por default
     Usuario(string nombreUsuario): nombreUsuario(nombreUsuario), listas(), tareas() {}
 
-    // Getters and Setters
-    string getNombreUsuario() {return nombreUsuario;}
-    vector <Lista> getListas() {return listas;}
-    vector<Tarea*> getTareasPersonal() {return tareas;}
+    // Getters
+    string getNombreUsuario() {
+        return nombreUsuario;
+    }
+    vector <Lista> getListas() {
+        return listas;
+    }
+    vector<Tarea*> getTareasPersonal() {
+        return tareas;
+    }
 
-    void setNombreUsuario(string nombreUsuario) {this->nombreUsuario = nombreUsuario;}
-    void setListas(vector<Lista> listas) {this->listas = listas;}
-    void setTareasTrabajo(vector<Tarea*> tareas) {this->tareas = tareas;}
+    // Setters
+    void setNombreUsuario(string nombreUsuario) {
+        this->nombreUsuario = nombreUsuario;
+    }
+    void setListas(vector<Lista> listas) {
+        this->listas = listas;
+    }
+    void setTareasTrabajo(vector<Tarea*> tareas) {
+        this->tareas = tareas;
+    }
 
-    // Tareas methods
-    void mostrarTareas();
-
-    void crearTarea();
-
-    void eliminarTarea(int index);
-
+    // Declaracion de metodos
+    // Métodos relacionados a Tareas
+    void mostrarTareas(); 
+    void crearTarea(); 
+    void eliminarTarea(int index); 
     void menuTareas();
 
-    // Listas methods
+    // Métodos relacionados a Listas
     void mostrarListas();
-
     void crearLista();
+    void eliminarLista(int index); 
+    void agregarTareaLista(int indexLista, int indexTarea); 
+    void mostrarTareasLista(Lista lista); 
+    void menuListas(); 
 
-    void eliminarLista(int index);
-
-    void agregarTareaLista(int indexLista, int indexTarea);
-
-    void mostrarTareasLista(Lista lista);
-
-    void menuListas();
-
-    // Otros metodos
-
-    void menu();
-
+    // Otros métodos
+    void menu(); 
     void cambiarNombre();
 };
 
-// Listas methods
+/**
+ * mostrarListas imprime todas las listas del usuario
+ *
+ * utiliza el arreglo listas[] y un contador, para recorrer todo el
+ * arreglo imprimiendo cada uno de los objetos de la clase Lista.
+ *
+ * @param
+ * @return
+ */
 void Usuario::mostrarListas() {
     int counter = 1;
     for (Lista i:listas) {
@@ -109,7 +124,6 @@ void Usuario::mostrarTareas() {
         cout<<"Descripcion: "<<tareas[i]->get_descripcion()<<endl;
     }
 }
-
 
 void Usuario::crearTarea() {
     string tipo;
@@ -297,7 +311,7 @@ void Usuario::menu(){
     cout<<"1. Menu de tareas"<<endl;
     cout<<"2. Menu de listas"<<endl;
     cout<<"3. Cambiar nombre de usuario"<<endl;
-    cout<<"5. Salir"<<endl;
+    cout<<"4. Salir"<<endl;
     cout<<"Ingrese el numero de la opcion que desea realizar: ";
     cin>>seleccion;
     if (seleccion == "1") {

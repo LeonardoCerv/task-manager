@@ -66,10 +66,10 @@ void Tarea::eliminarRecordatorio(int index){
     cout<<"Estos son tus recordatorios: "<<endl;
     int counter = 1;
       for (Recordatorio i: recordatorios){
-      vector<int>fecha = i.get_fecha();
+      vector<int>fecha = i.getFecha();
       cout<<"Recordatorio "<<counter<<": ";
       cout<<"fecha: "<< fecha[0] << "/"<< fecha[1] << "/" << fecha[2]; 
-      cout<<"   hora: "<< i.get_hora()<<endl;
+      cout<<"   hora: "<< i.getHora()<<endl;
       }
     }
 
@@ -111,7 +111,7 @@ void TareaTrabajo::crearRecordatorio() {
     cout << "Ingrese la hora del recordatorio: ";
     cin >> hora;
     for (Recordatorio i: recordatorios){
-      if (i.get_fecha() == fechaEntrega && i.get_hora() == hora){
+      if (i.getFecha() == fechaEntrega && i.getHora() == hora){
         cout<<"Ya existe un recordatorio con esa fecha y hora"<<endl;
         return;
       }
@@ -126,7 +126,7 @@ void TareaTrabajo::crearRecordatorio() {
     cout << "Ingrese la hora del recordatorio: ";
     cin >> hora;
     for (Recordatorio i: recordatorios){
-      if (i.get_fecha() == fecha && i.get_hora() == hora){
+      if (i.getFecha() == fecha && i.getHora() == hora){
         cout<<"Ya existe un recordatorio con esa fecha y hora"<<endl;
         return;
       }

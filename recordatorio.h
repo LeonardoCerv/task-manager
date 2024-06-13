@@ -9,34 +9,38 @@
 
 #ifndef RECORDATORIO_H_
 #define RECORDATORIO_H_
+
 #include <vector>
 using namespace std;
 
+// Declaro clase Recordatorio
 class Recordatorio {
+
+// Variables de instancia
 private:
     vector<int> fecha;
     int hora;
 
 public:
-    Recordatorio(): fecha(), hora(12) {};
+    // Constructores
+    Recordatorio(): fecha(), hora(12) {}; // Constructor por default
     Recordatorio(vector<int> fecha): fecha(fecha), hora(12){};
     Recordatorio(vector<int> fecha, int hora): fecha(fecha), hora(hora){};
 
-    vector<int> get_fecha() {
+    // Getters
+    vector<int> getFecha() {
         return fecha;
     }
+    int getHora() {
+        return hora;
+    }
 
-    int get_hora() {
-    return hora;
-   }
-
+    // Setters
     void setFecha(vector<int> fecha) {
         this->fecha = fecha;
     }
-
     void setHora(int hora) {
         this->hora = hora;
     }
 };
-
 #endif // RECORDATORIO_H_
