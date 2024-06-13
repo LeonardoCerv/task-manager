@@ -103,9 +103,9 @@ void Usuario::crearLista() {
   string nom;
   string des;
   cout<<"Ingrese el nombre de la lista: ";
-  cin>>nom;
+  getline(cin, nom);
   cout<<"Ingrese la descripcion de la lista: ";
-  cin>>des;
+  getline(cin, des);
   Lista l(nom, des);
   for (Lista i:listas) {
     if (i.getNombre() == nom) {
@@ -176,7 +176,7 @@ void Usuario::crearTarea() {
     vector<int> fecha;
     int aux = 0;
     cout<<"Ingrese el nombre de la tarea: ";
-    cin>>nom;
+    getline(cin, nom);
     cout<<"Ingrese la prioridad de la tarea: ";
     cin>>pri;
     cout << "Ingrese la fecha de entrega: ";
@@ -204,11 +204,11 @@ void Usuario::crearTarea() {
     int pri;
     string cat;  
     cout<<"Ingrese el nombre de la tarea: ";
-    cin>>nom;
+    getline(cin, nom);
     cout<<"Ingrese la prioridad de la tarea: ";
     cin>>pri;
     cout << "Ingrese la categoria: ";
-    cin >> cat;
+    getline(cin, cat);
     for (Tarea * i: tareas) {
       if (i->getNombre() == nom) {
       cout<<"Ya existe una tarea con ese nombre"<<endl;
