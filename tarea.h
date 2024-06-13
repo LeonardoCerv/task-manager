@@ -34,9 +34,9 @@ class Tarea {
   public:
     //constructores
     Tarea(): nombre(""), prioridad(0), descripcion(""), status(false), 
-    recordatorios() {}; //constructor por default
+      recordatorios() {}; //constructor por default
     Tarea(string nom, int pri): nombre(nom), prioridad(pri), descripcion(""), 
-    status(false),recordatorios() {};
+      status(false),recordatorios() {};
 
     // Getters
     string getNombre() {
@@ -127,8 +127,11 @@ class TareaTrabajo: public Tarea {
   public:
     //constructores
     TareaTrabajo(): Tarea("", 0) {}; //constructor por default
-    TareaTrabajo(string nom, int pri, vector<int> fech): Tarea(nom, pri), fechaEntrega(fech){
-      string des =  "Esta es una Tarea de Trabajo prevista para el dia "+to_string(fech[0])+" del mes "+to_string(fech[1])+" del año "+to_string(fech[2]);
+    TareaTrabajo(string nom, int pri, vector<int> fech): Tarea(nom, pri), 
+      fechaEntrega(fech){
+      string des =  "Esta es una Tarea de Trabajo prevista para el dia "+
+        to_string(fech[0])+" del mes "+to_string(fech[1])+" del año "+
+        to_string(fech[2]);
       setDescripcion(des);
     };
 
@@ -165,7 +168,8 @@ class TareaTrabajo: public Tarea {
  */
 void TareaTrabajo::crearRecordatorio() {
   string respuesta;
-  cout<<"desea utilizar la fecha de entrega de la tarea como recordatorio? (si/no)"<<endl;
+  cout<<"desea utilizar la fecha de entrega de la tarea como recordatorio?";
+  cout<<" (si/no)"<<endl;
   cin>>respuesta;
   if (respuesta == "si"){
     int hora;
@@ -207,7 +211,8 @@ class TareaPersonal: public Tarea {
   public:
   //constructores
   TareaPersonal(): Tarea("", 0) {}; //constructor por default
-  TareaPersonal(string nom, int pri, string categoria): Tarea(nom, pri), categoria(categoria) {
+  TareaPersonal(string nom, int pri, string categoria): Tarea(nom, pri), 
+      categoria(categoria) {
     string des = "Esta es una Tarea Personal perteneciente a la categoria ";
     des = des+categoria;
     setDescripcion(des);

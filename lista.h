@@ -28,8 +28,10 @@ class Lista {
   public:
     // Constructores
     Lista() : nombre(""), descripcion(""), status(false), tareas() {}; // Constructor por default
-    Lista(string nombre): nombre(nombre), descripcion(""), status(false), tareas() {};
-    Lista(string nombre, string descripcion): nombre(nombre), descripcion(descripcion), 
+    Lista(string nombre): nombre(nombre), descripcion(""), status(false), 
+      tareas() {};
+    Lista(string nombre, string descripcion): nombre(nombre), 
+      descripcion(descripcion), 
     status(false), tareas() {};
 
     // Getters
@@ -77,11 +79,11 @@ class Lista {
  * @return
  */
 void Lista::mostrarTareas(){
-    cout<<"Estas son las tareas en la lista "<<nombre<<": "<<endl;
-    for (int i=0; i < tareas.size(); i++){
-        cout<<"Nombre: "<<tareas[i]->getNombre()<<endl;
-        cout<<"Descripcion: "<<tareas[i]->getDescripcion()<<endl;
-    }
+  cout<<"Estas son las tareas en la lista "<<nombre<<": "<<endl;
+  for (int i=0; i < tareas.size(); i++){
+    cout<<"Nombre: "<<tareas[i]->getNombre()<<endl;
+    cout<<"Descripcion: "<<tareas[i]->getDescripcion()<<endl;
+  }
 }
 
 /**
@@ -94,14 +96,16 @@ void Lista::mostrarTareas(){
  * @return
  */
 void Lista::agregarTarea(Tarea* tarea){
-    for (Tarea * i: tareas){
-        if (i->getNombre() == tarea->getNombre() && i->getDescripcion() == tarea->getDescripcion()){
-            cout<<"Esa tarea ya fue agregada a la lista"<<endl;
-            return;
-        }
+  for (Tarea * i: tareas){
+    if (i->getNombre() == tarea->getNombre() && i->getDescripcion() == 
+      tarea->getDescripcion()){
+      cout<<"Esa tarea ya fue agregada a la lista"<<endl;
+      return;
     }
-    this->tareas.push_back(tarea);
-    cout<<"Se ha agregado la tarea "<<tareas.back()->getNombre()<<" a la lista "<<nombre<<endl;
+  }
+  this->tareas.push_back(tarea);
+  cout<<"Se ha agregado la tarea "<<tareas.back()->getNombre()<<
+    " a la lista "<<nombre<<endl;
 }
 
 /**
@@ -114,12 +118,12 @@ void Lista::agregarTarea(Tarea* tarea){
  * @return
  */
 void Lista::eliminarTarea(int index){
-    if (index >= this->tareas.size()){
-        cout<<"No existe una tarea en el index "<<index<<endl;
-        return;
-    }
-    this->tareas.erase(this->tareas.begin() + index);
-    cout<<"la tarea en el index "<<index<<" se ha eliminado"<<endl;
+  if (index >= this->tareas.size()){
+    cout<<"No existe una tarea en el index "<<index<<endl;
+    return;
+  }
+  this->tareas.erase(this->tareas.begin() + index);
+  cout<<"la tarea en el index "<<index<<" se ha eliminado"<<endl;
 }
 
 #endif // LISTA_H_
